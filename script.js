@@ -1,42 +1,61 @@
-// functions
-
+// ========= Functions =========
+// =============================
 function score(x) {
   scoreEl.textContent = x;
 }
 
-// Random number
+function checkNumber(inputVar, generatedVar) {
+  const result = inputVar > generatedVar ? '📈 Too high' : '📉 Too low';
+  messageEl.textContent = result;
+  score_--;
+  score(score_);
+}
+
+// ======== Variables ==========
+// =============================
+
 const randomNumber = Math.floor(Math.random() * 20) + 1;
 let score_ = 20;
 let highScore = 0;
 let playing = true;
-// DOM VARIABLES
 
+// ======= Dom variables =======
+// =============================
+
+// message display
 const messageEl = document.querySelector('.message');
+
+// score
 const scoreEl = document.getElementById('score');
 const highScoreEl = document.getElementById('high-score');
 
+// buttons
 const checkButtonEl = document.getElementById('check');
 const againButtonEl = document.getElementById('again');
 
+// input field
 const inputFieldEl = document.querySelector('.input-field');
 
+// number display
 const numberDisplay = document.querySelector('.question-mark');
 
 // check button functioning
+
 checkButtonEl.addEventListener('click', function () {
+  // 1) CHECKING IF THE PLAYERS ARE PLAYING OR NOT
   if (playing) {
-    numberDisplay.textContent = inputFieldEl.value;
     if (inputFieldEl.value.length === 0) {
+      // I) CHECKING FOR empty inputs
       messageEl.textContent = '⛔️ No number';
     } else {
-      if (Number(inputFieldEl.value) > randomNumber) {
-        messageEl.textContent = '📈 Too High!!';
-        score_--;
-        score(score_);
-      } else if (Number(inputFieldEl.value) < randomNumber) {
-        messageEl.textContent = '📉 Too Low!!';
-        score_--;
-        score(score_);
+      // II) DISPLAYING THE NUMBER
+      numberDisplay.textContent = inputFieldEl.value;
+      // III) CHECKING THE NUMBER
+      if (
+        Number(inputFieldEl.value > randomNumber) ||
+        Number(inputFieldEl.value) < randomNumber
+      ) {
+        checkNumber(inputFieldEl.value, randomNumber);
       } else {
         messageEl.textContent = '🎉 Correct Number!';
         highScoreEl.textContent = highScore;
