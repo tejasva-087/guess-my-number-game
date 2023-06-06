@@ -5,8 +5,7 @@ function score(x) {
 }
 
 // Random number
-// const randomNumber = Math.trunc(Math.random() * 20) + 1;
-const randomNumber = 10;
+const randomNumber = Math.floor(Math.random() * 20) + 1;
 let score_ = 20;
 let highScore = 0;
 let playing = true;
@@ -60,4 +59,7 @@ againButtonEl.addEventListener('click', function () {
   highScoreEl.textContent = highScore;
   score_ = 20;
   scoreEl.textContent = 20;
+  document.querySelector('body').style.backgroundColor = '#212529';
+  numberDisplay.textContent = '?';
+  inputFieldEl.value = '';
 });
